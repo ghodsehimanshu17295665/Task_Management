@@ -12,10 +12,11 @@ class TimeStampedModel(models.Model):
 
 
 class User(AbstractUser, TimeStampedModel):
+    id = models.AutoField(primary_key=True)
     email = models.EmailField(unique=True)
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["username"]
 
     def __str__(self):
         return self.email
@@ -38,6 +39,7 @@ class Task(TimeStampedModel):
     assignee = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="assigned_tasks"
     )
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
     description = models.TextField()
     status = models.CharField(
@@ -52,6 +54,7 @@ class Task(TimeStampedModel):
 
 
 class Comment(TimeStampedModel):
+    id = models.AutoField(primary_key=True)
     task = models.ForeignKey(
         Task, on_delete=models.CASCADE, related_name="comment"
     )
